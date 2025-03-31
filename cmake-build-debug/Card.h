@@ -31,6 +31,8 @@ public:
     void setFace(int face);
     void setSuit(enum Suit suit);
     Card& operator=(const Card &card);
+    bool operator==(const Card& other) const;
+    bool operator<(const Card &card) const;
 
 };
 std::ostream& operator<<(std::ostream& os, const Card& card);

@@ -51,6 +51,16 @@ void Card::setFace(const int face) {
     }
     return;
 }
+
+bool Card::operator==(const Card& other) const{
+return this->suit == other.suit && this->face == other.face;
+}
+
+bool Card::operator<(const Card& other) const{
+    return this->face < other.face && this->suit < other.suit;
+}
+
+
 void Card::setSuit(enum Suit suit) {
     this->suit = suit;
 }
