@@ -5,7 +5,7 @@
 void readAllCards(std::deque<Card>& cards) {
         std::cout << "Your current cards: " << std::endl;
         for (int i = 0; i < cards.size(); ++i) {
-            std::cout << i+1 << " " << cards.at(i) << std::endl;
+            std::cout << i+1 << " | " << cards.at(i) << std::endl;
         }
     }
 
