@@ -10,7 +10,6 @@ This is a **C++ implementation** of Crazy Eights where you play against a basic 
 - A shuffled deck
 - Card matching by suit or face
 - Special handling for eights (wild cards)
-- 
 ---
 
 ## 🕹️ How to Play
