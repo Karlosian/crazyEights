@@ -11,20 +11,20 @@ inline const char* ToString(Face f)
 {
     switch (f)
     {
-        case ACE:   return "Ace";
-        case ONE:   return "One";
-        case TWO:   return "Two";
-        case THREE: return "Three";
-        case FOUR:  return "Four";
-        case FIVE:  return "Five";
-        case SIX:   return "Six";
-        case SEVEN: return "Seven";
-        case EIGHT: return "Eight";
-        case NINE:  return "Nine";
-        case TEN:   return "Ten";
-        case JACK:  return "Jack";
-        case QUEEN: return "Queen";
-        case KING: return "King";
+        case ACE:   return "A ";
+        case ONE:   return "1 ";
+        case TWO:   return "2 ";
+        case THREE: return "3 ";
+        case FOUR:  return "4 ";
+        case FIVE:  return "5 ";
+        case SIX:   return "6 ";
+        case SEVEN: return "7 ";
+        case EIGHT: return "8 ";
+        case NINE:  return "9 ";
+        case TEN:   return "10";
+        case JACK:  return "J ";
+        case QUEEN: return "Q ";
+        case KING: return "K ";
         default: return "Unknown";
     }
 }

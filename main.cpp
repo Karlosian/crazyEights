@@ -44,51 +44,44 @@ return playable;
     while (!userDeck.empty() && !aiDeck.empty()) {
         readGameStatus(userDeck, aiDeck);
             std::cout << "Current card at the top of the deck: " << topCard << std::endl;
-            //ask if want to draw
-            int drawCard = -1;
-            while (drawCard !=1 && drawCard !=0) {
-                std::cout << "Would you like to draw a card? (0 = no, 1 = yes)" << std::endl;
-                std::cin >> drawCard;
-                if (drawCard == 0 && !isDeckPlayable(userDeck, topCard)) {
-                    std::cout << "You have no playable cards" << std::endl;
-                    drawCard = -1;
-                }
-            }
-            if (drawCard == 1) {
-                userDeck.push_front(dealingDeck.dealCard());
-                validated = true;
-                cardDrawn = true;
-                std::cout << "You drew : " << userDeck.front() << std::endl;
-            }
-            else {
                 while (!validated) {
-                    std::cout << "What card would you like to play? (state the number)" << std::endl;
+                    std::cout << "What card would you like to play? (state the number or enter 0 to draw card)" << std::endl;
                     std::cin >> playingIndex;
-                    validated = (topCard.getFace() == userDeck.at(playingIndex-1).getFace() || topCard.getSuit() == userDeck.at(playingIndex-1).getSuit());
-                    if (userDeck.at(playingIndex-1).getFace() == EIGHT) {
+                    if (playingIndex == 0) {
                         validated = true;
-                        isEight = true;
-                        std::cout << "Pick a suit: " << "\n"  << "1: Clubs \n 2: Diamonds \n 3: Hearts \n 4: Spades "<< std::endl;
-                        int num = -1;
-                        while (num>4 || num<1) {
-                            std::cin >> num;
+                        //draw a card
+                        userDeck.push_front(dealingDeck.dealCard());
+                        cardDrawn = true;
+                    }
+                    else if (playingIndex>0 && playingIndex<=userDeck.size()) {
+                        //check if the card that user is trying to play has either the same face, same suit, or is an eight.
+                        validated = (topCard.getFace() == userDeck.at(playingIndex-1).getFace() || topCard.getSuit() == userDeck.at(playingIndex-1).getSuit());
+                        if (userDeck.at(playingIndex-1).getFace() == EIGHT) {
+                            validated = true;
+                            isEight = true;
+                            std::cout << "Pick a suit: " << "\n"  << "1: Clubs \n 2: Diamonds \n 3: Hearts \n 4: Spades "<< std::endl;
+                            int num = -1;
+                            while (num>4 || num<1) {
+                                std::cin >> num;
+                            }
+                            switch (num) {
+                                case 1: topCard.setSuit(CLUBS); break;
+                                case 2: topCard.setSuit(DIAMONDS); break;
+                                case 3: topCard.setSuit(HEARTS); break;
+                                case 4: topCard.setSuit(SPADES); break;
+                                default: topCard.setSuit(CLUBS);
+                            }
+                            topCard.setFace(EIGHT);
+                            userDeck.erase(userDeck.begin()+(playingIndex-1));
                         }
-                        switch (num) {
-                            case 1: topCard.setSuit(CLUBS); break;
-                            case 2: topCard.setSuit(DIAMONDS); break;
-                            case 3: topCard.setSuit(HEARTS); break;
-                            case 4: topCard.setSuit(SPADES); break;
-                            default: topCard.setSuit(CLUBS);
-                        }
-                        topCard.setFace(EIGHT);
-                        userDeck.erase(userDeck.begin()+(playingIndex-1));
                     }
                 }
-            }
+
 
 
         if (!isEight && !cardDrawn) {
             //add card to top of pile then remove card from user deck
+            std::cout << "You have played " << userDeck.at(playingIndex-1) << std::endl;
             topCard.setFace(userDeck.at(playingIndex-1).getFace());
             topCard.setSuit(userDeck.at(playingIndex-1).getSuit());
             userDeck.erase(userDeck.begin() + (playingIndex - 1));
@@ -117,7 +110,7 @@ return playable;
                     //special logic, always go for suit of first card, or second if eight is index 0
                     if (index!=0) {
                         //if its not in index 0
-                        std::cout << "AI sets suit to " << aiDeck.at(0).getSuit() << std::endl;
+                        std::cout << "AI sets suit to " << ToString(aiDeck.at(0).getSuit()) << std::endl;
                         topCard.setSuit(aiDeck.at(0).getSuit());
 
                     }

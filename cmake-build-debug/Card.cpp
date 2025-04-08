@@ -65,6 +65,6 @@ void Card::setSuit(enum Suit suit) {
     this->suit = suit;
 }
 std::ostream& operator<<(std::ostream& os, const Card& card) {
-    os << ToString(card.getFace()) << " of "  << ToString(card.getSuit());
+    os << ToString(card.getFace()) << " "  << ToString(card.getSuit());
     return os;
 }
